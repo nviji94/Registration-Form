@@ -4,20 +4,19 @@ const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const cpassword = document.querySelector("#cpassword");
 
-const users = JSON.parse(localStorage.getItem('users')) || [];
+
 
 form.addEventListener('submit',(e)=>{
 	
-	validateInputsAndAddUser()
-		
+	if (!validateInputs()) {
+		e.preventDefault()
+	}
 	
+		
 })
 
 
-function saveUsersToLocalStorage() {
-	localStorage.setItem('users', JSON.stringify(users));
-}
-function validateInputsAndAddUser()
+function validateInputs()
 {
 	const usernameVal =username.value.trim();
 	const emailVal =email.value.trim();
@@ -72,18 +71,7 @@ function validateInputsAndAddUser()
 	else{
 		setSuccess(cpassword)
 	}
-	if(success){
-		const newUser = {
-			username: usernameVal,
-			email:emailVal,
-			password: passwordVal,
-			
-		};
-		
-		users.push(newUser);
-		saveUsersToLocalStorage();
-
-	}
+	
 	
 	
 	return success;
